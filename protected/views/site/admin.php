@@ -1,34 +1,50 @@
 <h1>Fragen freischalten</h1>
 <?php
-
-if(empty($_GET["delete"]) === false) {
-	$connection=Yii::app()->db;
-	$_sql = "DELETE FROM tbl_comments WHERE id = '".$_GET["delete"]."'";
-	$command = $connection->createCommand($_sql);
-	$data = $command->query();
+$_connection = Yii::app()->db;
+$_sql = "SELECT value FROM config WHERE name = 'security_code' LIMIT 1";
+$_command = $_connection->createCommand($_sql);
+$_data = $_command->query();
+foreach($_data as $_row) {
+	if($_row["value"] !== $_GET["code"]) {
+		die();
+	}
 }
 
-if(empty($_GET["accept"]) === false) {
-	$connection=Yii::app()->db;
-	$_sql = "UPDATE tbl_comments SET status = 'ok' WHERE id = '".$_GET["accept"]."'";
-	$command = $connection->createCommand($_sql);
-	$data = $command->query();
+if(isset($_GET["action"]) === true) {
+	if($_GET["action"] === "delete" || $_GET["action"] === "accept") {
+		$_action = $_GET["action"];
+	} else {
+		die();
+	}
+} else {
+	$_action = "";
+}
+
+if($_action === "delete") {
+	$_sql = "DELETE FROM tbl_comments WHERE id = '".$_GET["id"]."'";
+	$_command = $_connection->createCommand($_sql);
+	$_data = $_command->query();
+}
+
+if($_action === "accept") {
+	$_sql = "UPDATE tbl_comments SET status = 'ok' WHERE id = '".$_GET["id"]."'";
+	$_command = $_connection->createCommand($_sql);
+	$_data = $_command->query();
 }
 
 
 $_sql = "SELECT id, name, email, telefon, entry_point, typ, year, frage, datum FROM tbl_comments WHERE status = 'new' ORDER BY datum DESC";
-$connection=Yii::app()->db;
-$command = $connection->createCommand($_sql);
-$data = $command->query();
+$_command = $_connection->createCommand($_sql);
+$_data = $_command->query();
 $_output = "";
 $_output_counter = 0;
-foreach($data as $row) {
+foreach($_data as $_row) {
     ++$_output_counter;
-    $_link = Yii::app()->request->baseUrl."/index.php/site/budget?typ=" . $row["typ"] . "&year=" . $row["year"] . "&entry=" . $row["entry_point"];
-    $_output .= 'Frage #'.$row["id"]. '<span class="wp-cpl-date">'.date("d.m.Y H:i", $row["datum"]).' Uhr</span>';
-    $_output .= $row["name"]. ' ' . $row["email"] . ' ' . $row["telefon"];
-    $_output .= '<p class="wp-cpl-excerpt">'.$row["frage"].'</p>';
-    $_output .= '<a href="'.Yii::app()->request->baseUrl.'/index.php/site/admin?accept='.$row["id"].'">freischalten</a> <a href="'.Yii::app()->request->baseUrl.'/index.php/site/admin?delete='.$row["id"].'">l&ouml;schen</a>';
+    $_link = Yii::app()->request->baseUrl."/" . $_row["year"] . "/" . $_row["typ"] . "/" . $_row["entry_point"];
+    $_output .= 'Frage #'.$_row["id"]. '<span class="wp-cpl-date">'.date("d.m.Y H:i", $_row["datum"]).' Uhr</span>';
+    $_output .= $_row["name"]. ' ' . $_row["email"] . ' ' . $_row["telefon"];
+    $_output .= '<p class="wp-cpl-excerpt">'.$_row["frage"].'</p>';
+    $_output .= '<a href="'.Yii::app()->request->baseUrl.'/admin/'.$_GET["code"].'/accept/'.$_row["id"].'">freischalten</a> <a href="'.Yii::app()->request->baseUrl.'/admin/'.$_GET["code"].'/delete/'.$_row["id"].'">l&ouml;schen</a>';
 	$_output .= "<br/>";
 	$_output .= "<br/>";
 }

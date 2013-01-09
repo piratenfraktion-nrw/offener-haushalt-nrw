@@ -7,7 +7,6 @@ class SiteController extends CController {
 	public $defaultAction = 'budget';
     public $menu = array();
     public $breadcrumbs = array();
-    public $urlparams = array();
     public $params = array();
     public $onloadFunction = "";
 
@@ -23,27 +22,7 @@ class SiteController extends CController {
 		return $this->pageTitle;
 	}
 
-	public function createUrlParameterString() {
-		$_str = "";
-
-		$_first = true;
-		foreach($this->urlparams as $_param_key => $_param_value) {
-			if($_first === true) {
-				$_str = "?";
-				$_first = false;
-			} else {
-				$_str .= "&";
-			}
-
-			$_str .= $_param_key . "=" . $_param_value;
-		}
-
-		return $_str;
-	}
-	
 	public function checkParams($budget_type = "regular") {
-		//var_dump($_GET);
-
 		// typ - Einnahmen o. Ausgaben
 		if(isset($_GET["typ"]) === true) {
 			if($_GET["typ"] === "Einnahmen") {
@@ -54,7 +33,6 @@ class SiteController extends CController {
 				$this->params["typ"] = "Ausgaben";
 			}
 
-			$this->urlparams["typ"] = $this->params["typ"];
 		} else {
 			$this->params["typ"] = "Ausgaben";
 		}
@@ -66,13 +44,13 @@ class SiteController extends CController {
 			} else {
 				$this->params["year"] = "2013";
 			}
-			$this->urlparams["year"] = $this->params["year"];
 		} else {
 			$this->params["year"] = "2013";
 		}
 
 		// entry - kombinierte ID des Titels 
 		// entry_level - Tiefe des Eintrags
+		$this->params["entry"] = "000";;
 		$this->params["entry_level"] = 0;
 
 		$this->params["entry_point_part1"] = null;
@@ -86,6 +64,8 @@ class SiteController extends CController {
 				if(preg_match("/^\d{1,2}$/", $_parts[0]) > 0) {
 					$this->params["entry_level"] = 1;
 					$this->params["entry_point_part1"] = $_parts[0];
+
+					$this->params["entry"] = $_parts[0];
 				}
 			}
 
@@ -94,6 +74,8 @@ class SiteController extends CController {
 				if(preg_match("/^\d{1,3}\s\d{2,3}$/", $_str) > 0) {
 					$this->params["entry_level"] = 2;
 					$this->params["entry_point_part2"] = $_str;
+
+					$this->params["entry"] .= "_" . str_replace(" ", "---", $_parts[1]);
 				}
 			}
 
@@ -101,6 +83,8 @@ class SiteController extends CController {
 				if(preg_match("/^\d{1,4}$/", $_parts[2]) > 0) {
 					$this->params["entry_level"] = 3;
 					$this->params["entry_point_part3"] = $_parts[2];
+
+					$this->params["entry"] .= "_" . $_parts[2];
 				}
 			}
 
@@ -109,19 +93,18 @@ class SiteController extends CController {
 				if(preg_match("/^\d{3}\s\d{2}$/", $_str) > 0) {
 					$this->params["entry_level"] = 4;
 					$this->params["entry_point_part4"] = $_str;
+
+					$this->params["entry"] .= "_" . str_replace(" ", "---", $_parts[3]);
 				}
 			}
 
-			$this->urlparams["entry"] = $_GET["entry"];
-			$this->params["entry"] = $this->urlparams["entry"];
-		} else {
-			$this->params["entry"] = '000';
 		}
 
 		// budget_type - regulär o. Nachtrag
 		$this->params["budget_type"] = $budget_type;
-		/*var_dump($this->params);
-		die();*/
+		//var_dump($_GET);
+		//var_dump($this->params);
+		//die();
 	}
 	
 	public function actions() {
@@ -198,8 +181,8 @@ class SiteController extends CController {
 		if(isset($_POST['BudgetForm'])) {
     		$model->attributes=$_POST['BudgetForm'];
 		    $connection=Yii::app()->db;
-		    $_entry_point = $_GET["entry"];
-		    $_typ = $_GET["typ"];
+		    $_entry_point = $this->params["entry"];
+		    $_typ = $this->params["typ"];
 		    $_name = $_POST["BudgetForm"]["name"];
 		    $_email = $_POST["BudgetForm"]["email"];
 		    $_telefon = $_POST["BudgetForm"]["telefon"];
@@ -214,12 +197,14 @@ class SiteController extends CController {
 			    }
 		    }
 		    if($_set === true) {
-		   		$sql = "INSERT INTO tbl_comments VALUES ('','".$_entry_point."','".$_typ."','".$_year."','".$_name."','".$_email."','".$_telefon."','".$_frage."', '".$_datum."', 'new')";
-			    $command = $connection->createCommand($sql);
-			    $_ret = $command->query();
-			    $this->redirect(Yii::app()->request->baseUrl."/index.php/site/feedback?typ=" . $_typ . "&entry=" . $_entry_point . "&year=" . $this->params["year"]);
+		   		$_sql = "INSERT INTO tbl_comments VALUES ('','".$_entry_point."','".$_typ."','".$_year."','".$_name."','".$_email."','".$_telefon."','".$_frage."', '".$_datum."', 'new')";
+			    $_command = $connection->createCommand($_sql);
+			    $_ret = $_command->query();
+				
+				sleep(1);
+			    $this->redirect(Yii::app()->request->baseUrl."/feedback/" . $_year . "/" . $_typ . "/" . $_entry_point);
 		    } else {
-			    $this->redirect(Yii::app()->request->baseUrl."/index.php/site/budget?typ=" . $_GET["typ"] . "&entry=" . $_GET["entry"] . "&year=" . $_GET["year"] . "&error=name#question_form_error");
+			    $this->redirect(Yii::app()->request->baseUrl."/" . $_year . "/" . $_typ . "/" . $_entry_point . "/error_name#question_form_error");
 		    }
 		} else {
 			$this->render('budget',array('model'=>$model, 'budget_type' => $budget_type));

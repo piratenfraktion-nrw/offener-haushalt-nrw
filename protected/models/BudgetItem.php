@@ -13,7 +13,6 @@ class BudgetItem extends CActiveRecord {
     public $entry_point_parts = array();
     public $entry_level;
     public $typ;
-    public $param_string;
     public $query_details = array();
     public $query_details_vgl = array();
     public $columns;
@@ -27,11 +26,11 @@ class BudgetItem extends CActiveRecord {
         return parent::model($className);
     }
 
-	public function get_csv_link() {
-		return Yii::app()->baseUrl . "/" . $this->year . ".ods";
+	public function get_ods_link() {
+		return Yii::app()->baseUrl . "/assets/" . $this->year . ".ods";
 	}
-	public function get_json_link() {
-		return Yii::app()->baseUrl . "/" . $this->year . ".xls";
+	public function get_xls_link() {
+		return Yii::app()->baseUrl . "/assets/" . $this->year . ".xls";
 	}
 
 	public function init() {
@@ -44,7 +43,6 @@ class BudgetItem extends CActiveRecord {
 		$this->entry_point_parts[2] = $_c->params["entry_point_part3"];
 		$this->entry_point_parts[3] = $_c->params["entry_point_part4"];
 		$this->budgetType = $_c->params["budget_type"];
-		$this->param_string = $_c->createUrlParameterString();
 		
 		// Übersicht über alle Einzelpläne
 		if($this->entry_level === 0) {

@@ -5,6 +5,7 @@ Voraussetzungen
 Das Projekt basiert auf dem Yii-Framework: http://www.yiiframework.com (ist Bestandteil des Repositories)
 MySQL: 5.1+ (andere DBs möglich)
 PHP: 5.2+
+PHP-Module: gd / gd2 / APC
 
 Installation
 -------------

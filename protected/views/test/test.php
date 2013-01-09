@@ -1,5 +1,5 @@
 <?php
-$_db = Yii::app()->db;
+/*$_db = Yii::app()->db;
 $_table = "t_2013";
 $_sql = "UPDATE ".$_table." SET Kategorie_ID = '0'";
 $_db->createCommand($_sql)->query();
@@ -18,6 +18,6 @@ foreach($_rows as $_row) {
 	$_sql = "UPDATE ".$_table." SET Kategorie_ID = '".$_kat_id."' WHERE Einzelplan = '".$_row["Einzelplan"]."' AND Kapitel = '".$_row["Kapitel"]."' AND Titel = '".$_row["Titel"]."' LIMIT 1";
 	$_db->createCommand($_sql)->query();
 	$_last_kat = $_row["Kategorie"];
-}
+}*/
 
 ?>

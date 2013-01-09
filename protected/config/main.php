@@ -32,12 +32,12 @@ return array(
 			'tablePrefix' => 'tbl_',
 		),*/
 		
-		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=haushalt_neu',
-			'username' => 'haushalt_neu',
-			'password' => 'haushalt_neu',
-			'charset' => 'utf8',
-			'tablePrefix' => 'tbl_',
+      'db'=>array(
+            'connectionString' => 'mysql:host=localhost;dbname=haushalt_neu',
+            'username' => 'haushalt_neu',
+            'password' => 'haushalt_neu',
+            'charset' => 'utf8',
+            'tablePrefix' => 'tbl_',
 		),
 		'errorHandler'=>array(
 			'errorAction'=>'site/error',
@@ -46,9 +46,13 @@ return array(
 			'urlFormat'=>'path',
 			'showScriptName'=>false,
 			'rules'=>array(
-				'test/<action>'=>'test/<action>',
+				'site/captcha'=>'site/captcha',
+				'admin/<code>'=>'site/admin',
+				'admin/<code>/<action>/<id>'=>'site/admin',
+				'feedback/<year>/<typ>/<entry>'=>'site/feedback',
 				'<year>/<typ>'=>'site/budget',
 				'<year>/<typ>/<entry>'=>'site/budget',
+				'<year>/<typ>/<entry>/<error>'=>'site/budget',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
@@ -59,10 +63,10 @@ return array(
 					'class'=>'CFileLogRoute',
 					'levels'=>'error, warning',
 				),
-				array(
+				/*array(
 					'class'=>'CWebLogRoute',
 					'levels'=>'error, warning, trace, info, profile',
-				),
+				),*/
 				
 			),
 		),

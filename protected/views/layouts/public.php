@@ -32,18 +32,18 @@ Yii::app()->clientScript->registerScript('chooser_function',$_js,CClientScript::
 
 <?php
 $_sql = "SELECT id, name, entry_point, typ, year, frage, datum FROM tbl_comments WHERE status = 'ok' ORDER BY datum DESC LIMIT 5";
-$connection=Yii::app()->db;
-$command = $connection->createCommand($_sql); 
-$data = $command->query();
+$_connection = Yii::app()->db;
+$_command = $_connection->createCommand($_sql); 
+$_data = $_command->query();
 $_output = "";
 $_output_counter = 0;
-foreach($data as $row) {
+foreach($_data as $_row) {
 	++$_output_counter;
-	$_link = Yii::app()->request->baseUrl."/index.php/site/budget?typ=" . $row["typ"] . "&year=" . $row["year"] . "&entry=" . $row["entry_point"] . "#questions";
+	$_link = Yii::app()->request->baseUrl."/" . $_row["year"] . "/" . $_row["typ"] . "/" . $_row["entry_point"] . "#questions";
 	$_output .= '<li class="wp-cpl wp-cpl-even">';
-	$_output .= '<a href="'.$_link.'" title="" target="_self">Frage #'.$row["id"].'</a>';
-	$_output .= '<span class="wp-cpl-date">'.date("d.m.Y H:i", $row["datum"]).' Uhr</span>';
-	$_output .= '<p class="wp-cpl-excerpt">'.substr($row["frage"],0,100).'</p>';
+	$_output .= '<a href="'.$_link.'" title="" target="_self">Frage #'.$_row["id"].'</a>';
+	$_output .= '<span class="wp-cpl-date">'.date("d.m.Y H:i", $_row["datum"]).' Uhr</span>';
+	$_output .= '<p class="wp-cpl-excerpt">'.substr($_row["frage"],0,100).'</p>';
 	$_output .= '</li>';
 }
 if($_output_counter > 0) {
@@ -57,6 +57,6 @@ if($_output_counter > 0) {
 	$_model = new BudgetItem();
 ?>
 <span class="chart_infotext">Quelle: <a href="http://www.fm.nrw.de/">Finanzministerium NRW</a></span>
-<span class="chart_infotext">Datenexport: <a href="<?php echo $_model->get_json_link(); ?>" target="_new">XLS</a> | <a href="<?php echo $_model->get_csv_link(); ?>" target="_new">ODS</a></span>
+<span class="chart_infotext">Datenexport: <a href="<?php echo $_model->get_xls_link(); ?>" target="_new">XLS</a> | <a href="<?php echo $_model->get_ods_link(); ?>" target="_new">ODS</a></span>
 </div>
 <?php $this->endContent(); ?>

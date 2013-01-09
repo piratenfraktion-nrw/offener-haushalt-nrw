@@ -21,7 +21,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 <div id="infovis2"></div>
 <span style="font-size: 10px;">*DM-Werte vor 2002 sind in Euro umgerechnet</span>
 <br/>
-<span style="font-size: 10px;">*Aufgrund von strukturellen &Auml;nderungen in den Haushaltsplänen stehen u.U. nicht für alle Jahre Daten zur Verfügung</span>
+<span style="font-size: 10px;">*Aufgrund von strukturellen &Auml;nderungen in den Haushaltspl&auml;nen stehen u.U. nicht f&uuml;r alle Jahre Daten zur Verf&uuml;gung</span>
 <br/>
 <br/>
 <br/>
@@ -62,16 +62,15 @@ if($_model->entry_level === 4) {
 <?php
 $_c = Yii::app()->controller;
 $_sql = "SELECT id, name, entry_point, typ, frage, datum FROM tbl_comments WHERE entry_point = '".$_c->params["entry"]."' AND year = '".$_c->params["year"]."' AND status = 'ok' ORDER BY datum DESC LIMIT 5";
-$connection=Yii::app()->db;
-$command = $connection->createCommand($_sql);
-$data = $command->query();
+$_connection = Yii::app()->db;
+$_command = $_connection->createCommand($_sql);
+$_data = $_command->query();
 $_output = "";
 $_output_counter = 0;
-foreach($data as $row) {
+foreach($_data as $_row) {
     ++$_output_counter;
-    $_link = Yii::app()->request->baseUrl."/index.php/site/budget?typ=" . $row["typ"] . "&entry=" . $row["entry_point"];
-    $_output .= 'Frage #'.$row["id"].'<br/>' . '<span class="wp-cpl-date">'.date("d.m.Y H:i", $row["datum"]).' Uhr</span>';
-    $_output .= '<p class="wp-cpl-excerpt">'.$row["frage"].'</p>';
+    $_output .= 'Frage #'.$_row["id"].'<br/>' . '<span class="wp-cpl-date">'.date("d.m.Y H:i", $_row["datum"]).' Uhr</span>';
+    $_output .= '<p class="wp-cpl-excerpt">'.$_row["frage"].'</p>';
 }
 if($_output_counter > 0) {
     echo($_output);
@@ -79,8 +78,8 @@ if($_output_counter > 0) {
     echo("<br/>");
 }
 ?>
-Stell dir vor,du hast Fragen und die Regierung MUSS antworten! ...
-Die persönlichen Daten werden nur für eventuelle Rückfragen genutzt. Sie werden nicht veröffentlicht oder weitergegeben und sind optional.
+Stell dir vor, du hast Fragen und die Regierung MUSS antworten!<br/>
+Die pers&ouml;nlichen Daten werden nur f&uuml;r eventuelle R&uuml;ckfragen genutzt. Sie werden nicht ver&ouml;ffentlicht oder weitergegeben und sind optional.
 
 <?php
     $model = new BudgetForm();

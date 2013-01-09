@@ -829,17 +829,17 @@ div.orbit, div.orbit-wrapper { width: 100% !important; }
             <header id="logo">
                 <div class="pull-right" style="padding: 50px 50px 0 0;">
                     <a href="http://www.facebook.com/PiratenfraktionNRW" title="zur Facebookseite der Fraktion">
-                        <img width="32" height="32" alt="Facebook-Icon" src="http://1.1.1.2/bmi/www.piratenfraktion-nrw.de/wp-content/themes/wordpress-bootstrap/images/icons/facebook-32x32.png">
+                        <img width="32" height="32" alt="Facebook-Icon" src="http://www.piratenfraktion-nrw.de/wp-content/themes/wordpress-bootstrap/images/icons/facebook-32x32.png">
                     </a>
                     <a href="https://twitter.com/20piraten" title="zum Twitteraccount der Fraktion">
-                        <img width="32" height="32" alt="Twitter-Icon" src="http://1.1.1.2/bmi/www.piratenfraktion-nrw.de/wp-content/themes/wordpress-bootstrap/images/icons/twitter-32x32.png">
+                        <img width="32" height="32" alt="Twitter-Icon" src="http://www.piratenfraktion-nrw.de/wp-content/themes/wordpress-bootstrap/images/icons/twitter-32x32.png">
                     </a>
                     <a href="https://youtube.com/PiratenfraktionNRW" title="zum YouTube-Account der Fraktion">
-                        <img width="32" height="32" alt="YouTube-Icon" src="http://1.1.1.2/bmi/www.piratenfraktion-nrw.de/wp-content/themes/wordpress-bootstrap/images/icons/youtube-32x32.png">
+                        <img width="32" height="32" alt="YouTube-Icon" src="http://www.piratenfraktion-nrw.de/wp-content/themes/wordpress-bootstrap/images/icons/youtube-32x32.png">
                     </a>
                 </div>
                 <a title="Die offizielle Homepage der Piratenfraktion im Landtag NRW" href="http://www.piratenfraktion-nrw.de">
-                    <img width="580" src="http://1.1.1.2/bmi/www.piratenfraktion-nrw.de/wp-content/themes/wordpress-bootstrap/images/pp.png">
+                    <img width="580" src="http://www.piratenfraktion-nrw.de/wp-content/themes/wordpress-bootstrap/images/pp.png">
                 </a>
             </header>
             

@@ -283,7 +283,8 @@ class BudgetItem extends CActiveRecord {
 		}
 
 		$query = $_sql;
-		$_json = 'var json_kat = eval({';
+		//$_json = 'var json_kat = eval({';
+		$_json = 'var json_kat = {';
 				$_json .= "\n";
   		$_json .= '"children": [';
 				$_json .= "\n";
@@ -397,7 +398,7 @@ class BudgetItem extends CActiveRecord {
 		$_json .= "\n";
 		$_json .= '   "name_full": "'.$_parent_name_full . '"';
 		$_json .= "\n";
-		$_json .= '});';
+		$_json .= '};';
 		$_json .= "\n";
 
 		if(Yii::app()->params["caching"] === true) {
@@ -515,7 +516,7 @@ class BudgetItem extends CActiveRecord {
 	public function render_json_treemap() {
 		$query = "SELECT " . $this->query_details["select"] . " FROM " . $this->tableName() . " WHERE " . $this->query_details["condition"] . " AND Wert1 > 0 GROUP BY " . $this->query_details["group by"];
 
-		$_json = 'var json = eval({';
+		$_json = 'var json = {';
 				$_json .= "\n";
   		$_json .= '"children": [';
 				$_json .= "\n";
@@ -638,7 +639,7 @@ class BudgetItem extends CActiveRecord {
 		$_json .= "\n";
 		$_json .= '   "name_full": "'.$_parent_name_full . '"';
 		$_json .= "\n";
-		$_json .= '});';
+		$_json .= '};';
 		$_json .= "\n";
 
 		if(Yii::app()->params["caching"] === true) {

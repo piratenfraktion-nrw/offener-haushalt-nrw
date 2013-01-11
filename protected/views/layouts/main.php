@@ -759,7 +759,8 @@ div.orbit, div.orbit-wrapper { width: 100% !important; }
                                 <div class="menu-collapse">
                                     <ul class="menu">   
                                     <li class="menu-item">
-                                        <a title="Startseite" href="/"><i class="icon-home"></i></a>
+                                        <!--<a title="Startseite" href="/"><i class="icon-home"></i></a>-->
+                                        <a title="Startseite" href="/"><img src="<?php echo Yii::app()->request->baseUrl; ?>/assets/house.png" id="nav_house" border="0" style="display: inline;" /></a>
                                     </li>
                                     </ul>
                                     <div class="menu-startseite-container"><ul id="menu-startseite" class="menu"><li id="menu-item-7579" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7579"><a href="http://www.piratenfraktion-nrw.de/20piraten/">20 Piraten</a>
@@ -816,9 +817,9 @@ div.orbit, div.orbit-wrapper { width: 100% !important; }
 </ul></div>                                </div>
                                 
                             </nav>
-                                                        <form class="navbar-search pull-right" role="search" method="get" id="searchform" action="http://www.piratenfraktion-nrw.de/">
+                                                        <!--<form class="navbar-search pull-right" role="search" method="get" id="searchform" action="http://www.piratenfraktion-nrw.de/">
                                 <input name="s" id="s" type="text" class="search-query" autocomplete="off" placeholder="Suche">
-                            </form>
+                            </form>-->
                         </div>
                     </div>
                 </div>
@@ -827,7 +828,7 @@ div.orbit, div.orbit-wrapper { width: 100% !important; }
         
         <div class="container">
             <header id="logo">
-                <div class="pull-right" style="padding: 50px 50px 0 0;">
+                <div class="pull-right2" style="float: right; padding: 50px 50px 0 0;">
                     <a href="http://www.facebook.com/PiratenfraktionNRW" title="zur Facebookseite der Fraktion">
                         <img width="32" height="32" alt="Facebook-Icon" src="http://www.piratenfraktion-nrw.de/wp-content/themes/wordpress-bootstrap/images/icons/facebook-32x32.png">
                     </a>

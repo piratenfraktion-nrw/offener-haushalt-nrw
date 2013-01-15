@@ -303,8 +303,8 @@ class BudgetItem extends CActiveRecord {
 			$_parent_name = $this->typ . " " . $this->year;
 		}
     	foreach($_rows as $_row) {
-			$_entry_key = Yii::app()->request->baseUrl . "/" . $this->year . "/" . $this->typ . "/" . $_row["Einzelplan"];
-			$_entry_key_parent = Yii::app()->request->baseUrl . "/" . $this->year . "/" . $this->typ;
+			$_entry_key = Yii::app()->params["baseUrl"] . "/" . $this->year . "/" . $this->typ . "/" . $_row["Einzelplan"];
+			$_entry_key_parent = Yii::app()->params["baseUrl"] . "/" . $this->year . "/" . $this->typ;
 			$_parent_name = $this->typ . " " . $this->year;
 
 			if($this->entry_level === 0) {
@@ -377,7 +377,7 @@ class BudgetItem extends CActiveRecord {
 			++$_counter;
 		}
 
-		$_root_parent = Yii::app()->request->baseUrl . "/";
+		$_root_parent = Yii::app()->params["baseUrl"] . "/";
 		/*if($this->entry_level === 1) {
 		} elseif($this->entry_level === 2) {
 			$_root_parent .= "/".$this->year."/" . $this->typ . "/" . $this->entry_point_parts[0];
@@ -536,8 +536,8 @@ class BudgetItem extends CActiveRecord {
 		}
     	foreach($_rows as $_row) {
 			$_view = "budget";
-			$_entry_key = Yii::app()->request->baseUrl . "/" . $this->year . "/" . $this->typ . "/" . $_row["Einzelplan"];
-			$_entry_key_parent = Yii::app()->request->baseUrl . "/" . $this->year . "/" . $this->typ;
+			$_entry_key = Yii::app()->params["baseUrl"] . "/" . $this->year . "/" . $this->typ . "/" . $_row["Einzelplan"];
+			$_entry_key_parent = Yii::app()->params["baseUrl"] . "/" . $this->year . "/" . $this->typ;
 			$_parent_name = $this->typ . " " . $this->year;
 
 				Yii::app()->controller->setPageTitle($_parent_name);
@@ -667,14 +667,14 @@ class BudgetItem extends CActiveRecord {
 	}
 
 	public function render_ep($data, $row) {
-		$_value = '<a href="'.Yii::app()->request->baseUrl.'/' . $this->year . "/" . $this->typ . "/" . $data->Einzelplan . '" class="list_a" style="color: #000000;"><span style="color: '.Yii::app()->params["einzelplan_farben"][$data->Einzelplan].'; font-weight: bold;">' .  $data->Einzelplan ." " . '</span>' . Yii::app()->params["einzelplan_namen"][$this->year][$data->Einzelplan] . "</a>";
+		$_value = '<a href="'.Yii::app()->params["baseUrl"].'/' . $this->year . "/" . $this->typ . "/" . $data->Einzelplan . '" class="list_a" style="color: #000000;"><span style="color: '.Yii::app()->params["einzelplan_farben"][$data->Einzelplan].'; font-weight: bold;">' .  $data->Einzelplan ." " . '</span>' . Yii::app()->params["einzelplan_namen"][$this->year][$data->Einzelplan] . "</a>";
 
 		return $_value;
 	}
 
 	public function render_kapitel($data, $row) {
 		if($data->Summe1 > 0) {
-			$_value = '<a href="'.Yii::app()->request->baseUrl.'/' . $this->year . '/' . $this->typ . "/" . $data->Einzelplan . '_' . str_replace(" ", "---", $data->Kapitel) . '" class="list_a" style="color: #000000;">' .  $data->Kapiteltext . "</a>";
+			$_value = '<a href="'.Yii::app()->params["baseUrl"].'/' . $this->year . '/' . $this->typ . "/" . $data->Einzelplan . '_' . str_replace(" ", "---", $data->Kapitel) . '" class="list_a" style="color: #000000;">' .  $data->Kapiteltext . "</a>";
 		} else {
 			$_value = $data->Kapiteltext;
 		}
@@ -685,7 +685,7 @@ class BudgetItem extends CActiveRecord {
 	public function render_kategorie($data, $row) {
 		$data->Kategorie = $this->strip_foo($data->Kategorie);
 		if($data->Summe1 > 0) {
-			$_value = '<a href="'.Yii::app()->request->baseUrl.'/' . $this->year . '/' . $this->typ . '/' . $data->Einzelplan . '_' . str_replace(" ", "---", $data->Kapitel) . '_' . $data->Kategorie_ID . '" class="list_a" style="color: #000000;">' .  $data->Kategorie . "</a>";
+			$_value = '<a href="'.Yii::app()->params["baseUrl"].'/' . $this->year . '/' . $this->typ . '/' . $data->Einzelplan . '_' . str_replace(" ", "---", $data->Kapitel) . '_' . $data->Kategorie_ID . '" class="list_a" style="color: #000000;">' .  $data->Kategorie . "</a>";
 		} else {
 			$_value = $data->Kategorie;
 		}
@@ -723,7 +723,7 @@ class BudgetItem extends CActiveRecord {
 	public function render_titel($data, $row) {
 		$_value = $this->strip_krams($data->Titel) . " " . $this->strip_krams($data->Beschreibung);
 		if($this->entry_level === 3) {
-			$_value = '<a href="'.Yii::app()->request->baseUrl.'/' . $this->year . '/' . $this->typ . '/' . $data->Einzelplan . '_' . str_replace(" ", "---", $data->Kapitel) . '_' . $data->Kategorie_ID . "_" . str_replace(" ", "---", $data->Titel) . '" class="list_a" style="color: #000000;">' .  $_value . "</a>";
+			$_value = '<a href="'.Yii::app()->params["baseUrl"].'/' . $this->year . '/' . $this->typ . '/' . $data->Einzelplan . '_' . str_replace(" ", "---", $data->Kapitel) . '_' . $data->Kategorie_ID . "_" . str_replace(" ", "---", $data->Titel) . '" class="list_a" style="color: #000000;">' .  $_value . "</a>";
 		}
 
 		return $_value;

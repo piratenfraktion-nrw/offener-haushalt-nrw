@@ -40,11 +40,11 @@ $_output = "";
 $_output_counter = 0;
 foreach($_data as $_row) {
     ++$_output_counter;
-    $_link = Yii::app()->request->baseUrl."/" . $_row["year"] . "/" . $_row["typ"] . "/" . $_row["entry_point"];
+    $_link = Yii::app()->params["baseUrl"]."/" . $_row["year"] . "/" . $_row["typ"] . "/" . $_row["entry_point"];
     $_output .= 'Frage #'.$_row["id"]. '<span class="wp-cpl-date">'.date("d.m.Y H:i", $_row["datum"]).' Uhr</span>';
     $_output .= $_row["name"]. ' ' . $_row["email"] . ' ' . $_row["telefon"];
     $_output .= '<p class="wp-cpl-excerpt">'.$_row["frage"].'</p>';
-    $_output .= '<a href="'.Yii::app()->request->baseUrl.'/admin/'.$_GET["code"].'/accept/'.$_row["id"].'">freischalten</a> <a href="'.Yii::app()->request->baseUrl.'/admin/'.$_GET["code"].'/delete/'.$_row["id"].'">l&ouml;schen</a>';
+    $_output .= '<a href="'.Yii::app()->params["baseUrl"].'/admin/'.$_GET["code"].'/accept/'.$_row["id"].'">freischalten</a> <a href="'.Yii::app()->params["baseUrl"].'/admin/'.$_GET["code"].'/delete/'.$_row["id"].'">l&ouml;schen</a>';
 	$_output .= "<br/>";
 	$_output .= "<br/>";
 }

@@ -1,8 +1,6 @@
 <?php
 
 $_params = array(
-	'commentEmail'=>'breeen@gmail.com',
-	'caching'=>false,
 	"einzelplan_namen" => array(
 		"1998" => array(
     		"1" => "Landtag",
@@ -353,6 +351,7 @@ $_params = array(
 	"factor_euro_dm" => 0.51,
 );
 
+include("custom.php");
 $_params["einzelplan_namen"]["2003_1"] = $_params["einzelplan_namen"]["2003"];
 $_params["einzelplan_namen"]["2000_1"] = $_params["einzelplan_namen"]["2000"];
 return $_params;

@@ -2,20 +2,16 @@
 
 require_once("globals.php");
 
-return array(
+$_config = array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'NRW Haushalt',
 	'preload'=>array('log'),
 	'import'=>array(
 		'application.models.*',
 		'application.extensions.*',
-		//'application.extensions.SpreadsheetReader.*',
 	),
 	'defaultController'=>'site',
     'modules'=>array(
-		/*'importcsv'=>array(
-            'path'=>'upload/',
-        ),*/
     ),
 	'components'=>array(
 		/*'kint' => array(
@@ -24,21 +20,9 @@ return array(
 		'user'=>array(
 			'allowAutoLogin'=>true,
 		),
-   	/*'cache' => array(
-    	'class' => 'system.caching.CApcCache',
-	),*/
-		/*'db'=>array(
-			'connectionString' => 'sqlite:protected/data/blog.db',
-			'tablePrefix' => 'tbl_',
+   		/*'cache' => array(
+    		'class' => 'system.caching.CApcCache',
 		),*/
-		
-      'db'=>array(
-            'connectionString' => 'mysql:host=localhost;dbname=haushalt_neu',
-            'username' => 'haushalt_neu',
-            'password' => 'haushalt_neu',
-            'charset' => 'utf8',
-            'tablePrefix' => 'tbl_',
-		),
 		'errorHandler'=>array(
 			'errorAction'=>'site/error',
 		),
@@ -73,3 +57,7 @@ return array(
 	),
 	'params'=>require(dirname(__FILE__).'/params.php'),
 );
+
+include("custom.php");
+
+return $_config;

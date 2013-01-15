@@ -96,7 +96,7 @@ Die pers&ouml;nlichen Daten werden nur f&uuml;r eventuelle R&uuml;ckfragen genut
 <span id="question_form_error" style="color: red;">
 <?php
 if(isset($_GET["error"]) === true) {
-    echo "Bitte gib mindestens deine Frage ein!";
+    echo "Bitte überprüfe den Code und gib mindestens deine Frage ein!";
 }
 ?>
 </span>

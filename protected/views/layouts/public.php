@@ -19,7 +19,7 @@ function chooser_link() {
     var e = document.getElementById("select_year");
     var year = e.options[e.selectedIndex].value;
 
-    link="'.Yii::app()->request->baseUrl.'/" + year + "/" + typ;
+    link="'.Yii::app()->params["baseUrl"].'/" + year + "/" + typ;
     window.location.href=link;
 }
 ';
@@ -39,7 +39,7 @@ $_output = "";
 $_output_counter = 0;
 foreach($_data as $_row) {
 	++$_output_counter;
-	$_link = Yii::app()->request->baseUrl."/" . $_row["year"] . "/" . $_row["typ"] . "/" . $_row["entry_point"] . "#questions";
+	$_link = Yii::app()->params["baseUrl"]."/" . $_row["year"] . "/" . $_row["typ"] . "/" . $_row["entry_point"] . "#questions";
 	$_output .= '<li class="wp-cpl wp-cpl-even">';
 	$_output .= '<a href="'.$_link.'" title="" target="_self">Frage #'.$_row["id"].'</a>';
 	$_output .= '<span class="wp-cpl-date">'.date("d.m.Y H:i", $_row["datum"]).' Uhr</span>';
@@ -48,6 +48,8 @@ foreach($_data as $_row) {
 }
 if($_output_counter > 0) {
 	echo($_output);
+} else {
+	echo "Es wurde noch keine Fragen eingereicht.";
 }
 ?>
 

@@ -196,15 +196,19 @@ class SiteController extends CController {
 				    $_set = false;
 			    }
 		    }
+			$_model_valid = $model->validate();
+			if($_model_valid === false) {
+				$_set = false;
+			}
 		    if($_set === true) {
 		   		$_sql = "INSERT INTO tbl_comments VALUES ('','".$_entry_point."','".$_typ."','".$_year."','".$_name."','".$_email."','".$_telefon."','".$_frage."', '".$_datum."', 'new')";
 			    $_command = $connection->createCommand($_sql);
 			    $_ret = $_command->query();
 				
 				sleep(1);
-			    $this->redirect(Yii::app()->request->baseUrl."/feedback/" . $_year . "/" . $_typ . "/" . $_entry_point);
+			    $this->redirect(Yii::app()->params["baseUrl"]."/feedback/" . $_year . "/" . $_typ . "/" . $_entry_point);
 		    } else {
-			    $this->redirect(Yii::app()->request->baseUrl."/" . $_year . "/" . $_typ . "/" . $_entry_point . "/error_name#question_form_error");
+			    $this->redirect(Yii::app()->params["baseUrl"]."/" . $_year . "/" . $_typ . "/" . $_entry_point . "/error_name#question_form_error");
 		    }
 		} else {
 			$this->render('budget',array('model'=>$model, 'budget_type' => $budget_type));

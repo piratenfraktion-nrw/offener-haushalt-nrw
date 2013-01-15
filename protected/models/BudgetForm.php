@@ -20,7 +20,7 @@ class BudgetForm extends CFormModel
 	{
 		return array(
 			array('frage', 'required'),
-			array('verifyCode', 'captcha', 'allowEmpty'=> !extension_loaded('gd')),
+			array('verifyCode', 'captcha', 'allowEmpty'=> !CCaptcha::checkRequirements()),
 		);
 	}
 

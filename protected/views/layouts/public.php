@@ -49,7 +49,7 @@ foreach($_data as $_row) {
 if($_output_counter > 0) {
 	echo($_output);
 } else {
-	echo "Es wurde noch keine Fragen eingereicht.";
+	echo "Es wurde noch keine Frage eingereicht.";
 }
 ?>
 

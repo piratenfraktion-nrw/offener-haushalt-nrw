@@ -206,6 +206,9 @@ class SiteController extends CController {
 			    $_ret = $_command->query();
 				
 				sleep(1);
+				$_msg = "Von: " . $_name . " | " . $_telefon . " | " . $_email . "\n";
+				$_msg .= $_frage . "\n"; 
+				mail(Yii::app()->params["commentEmail"], "Haushalt NRW: Neue Frage im Backend", $_msg);
 			    $this->redirect(Yii::app()->params["baseUrl"]."/feedback/" . $_year . "/" . $_typ . "/" . $_entry_point);
 		    } else {
 			    $this->redirect(Yii::app()->params["baseUrl"]."/" . $_year . "/" . $_typ . "/" . $_entry_point . "/error_name#question_form_error");

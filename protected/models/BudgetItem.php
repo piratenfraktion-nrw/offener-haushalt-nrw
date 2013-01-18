@@ -540,7 +540,7 @@ class BudgetItem extends CActiveRecord {
 			$_entry_key_parent = Yii::app()->params["baseUrl"] . "/" . $this->year . "/" . $this->typ;
 			$_parent_name = $this->typ . " " . $this->year;
 
-				Yii::app()->controller->setPageTitle($_parent_name);
+			Yii::app()->controller->setPageTitle($_parent_name);
 			if($this->entry_level === 0) {
 				$_json .= "\n";
 				$_json .= '{"name": "'.Yii::app()->params["einzelplan_namen"][$this->year][$_row["Einzelplan"]].'",';
@@ -608,11 +608,17 @@ class BudgetItem extends CActiveRecord {
 				if($_area < 0) {
 					$_area = $this->euro_dm($_row["Summe1"]) * -1;
 				}
+				if($_area == 0) {
+					$_area = 1;
+				}
 				$_json .= '"data": {   '.'"$color": "'.Yii::app()->params["einzelplan_farben"][$_row["Einzelplan"]].'",'.'"value": "'.$this->euro_dm($_row["Summe1"]).'",   "$area": "'.$_area.'", "entry_key_parent": "'.$_entry_key_parent.'" }}';
 			} else {
 				$_area = $this->euro_dm($_row["Summe1"]);
 				if($_area < 0) {
 					$_area = $this->euro_dm($_row["Summe1"]) * -1;
+				}
+				if($_area == 0) {
+					$_area = 1;
 				}
 				$_json .= '"data": {   '.'"$color": "'.Yii::app()->params["einzelplan_farben"][$_row["Einzelplan"]].'",'.'"value": "'.$this->euro_dm($_row["Summe1"]).'",   "$area": "'.$_area.'",   "entry_key": "'.$_entry_key.'", "entry_key_parent": "'.$_entry_key_parent.'" }}';
 				$_json .= "\n";

@@ -20,14 +20,21 @@ if(isset($_GET["action"]) === true) {
 	$_action = "";
 }
 
+$_id = "";
+if(isset($_GET["id"]) === true) {
+	if(is_numeric($_GET["id"]) === true) {
+		$_id = $_GET["id"];
+	}
+}
+
 if($_action === "delete") {
-	$_sql = "DELETE FROM tbl_comments WHERE id = '".$_GET["id"]."'";
+	$_sql = "UPDATE tbl_comments SET status = 'deleted' WHERE id = '".$_id."'";
 	$_command = $_connection->createCommand($_sql);
 	$_data = $_command->query();
 }
 
 if($_action === "accept") {
-	$_sql = "UPDATE tbl_comments SET status = 'ok' WHERE id = '".$_GET["id"]."'";
+	$_sql = "UPDATE tbl_comments SET status = 'ok' WHERE id = '".$_id."'";
 	$_command = $_connection->createCommand($_sql);
 	$_data = $_command->query();
 }

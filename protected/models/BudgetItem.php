@@ -514,7 +514,7 @@ class BudgetItem extends CActiveRecord {
 	}
 
 	public function render_json_treemap() {
-		$query = "SELECT " . $this->query_details["select"] . " FROM " . $this->tableName() . " WHERE " . $this->query_details["condition"] . " AND Wert1 > 0 GROUP BY " . $this->query_details["group by"];
+		$query = "SELECT " . $this->query_details["select"] . " FROM " . $this->tableName() . " WHERE " . $this->query_details["condition"] . " GROUP BY " . $this->query_details["group by"];
 
 		$_json = 'var json = {';
 				$_json .= "\n";

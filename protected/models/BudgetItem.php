@@ -258,7 +258,7 @@ class BudgetItem extends CActiveRecord {
 	}
 
 	public function vgl_kat() {
-		$_kat = $this->category;
+		$_kat = mysql_escape_string($this->category); // teilweise führen die Kategorienamen ''
 		$_tit = $this->titel;
 
 		$_sql = "";
@@ -411,6 +411,7 @@ class BudgetItem extends CActiveRecord {
 		$_values = Yii::app()->params["jahre_val"];
 		$_sql = "";
 
+		$_kat = mysql_escape_string($this->category); // teilweise führen die Kategorienamen ''
 		$_count_values = count($_values);
 		$_value_counter = 1;
 		foreach($_values as $_value) {
@@ -435,14 +436,14 @@ class BudgetItem extends CActiveRecord {
 				$_sql .= " AND Einzelplan = '" . $this->entry_point_parts[0] . "'";
 				$_sql .= " AND Kapitel = '" . $this->entry_point_parts[1] . "'";
 				//$_sql .= " AND Kategorie = '" . $this->entry_point_parts[2] . "'";
-				$_sql .= " AND Kategorie = '" . $this->category . "'";
+				$_sql .= " AND Kategorie = '" . $_kat . "'";
 			} else if($this->entry_level === 4) {
 				$_sql .= "SELECT Jahr, Einzelplan, SUM(Wert1) AS Wert FROM t_" . $_value;
 				$_sql .= " WHERE Typ = '" . $this->typ . "'";
 				$_sql .= " AND Einzelplan = '" . $this->entry_point_parts[0] . "'";
 				$_sql .= " AND Kapitel = '" . $this->entry_point_parts[1] . "'";
 				//$_sql .= " AND Kategorie = '" . $this->entry_point_parts[2] . "'";
-				$_sql .= " AND Kategorie = '" . $this->category . "'";
+				$_sql .= " AND Kategorie = '" . $_kat. "'";
 				$_sql .= " AND Titel = '" . $this->entry_point_parts[3] . "'";
 			}
 	
@@ -453,8 +454,6 @@ class BudgetItem extends CActiveRecord {
 			++$_value_counter;
 		}
 
-		//var_dump($_sql);
-		//die();
 		$_connection=Yii::app()->db;
 		$_command = $_connection->createCommand($_sql);
 		$_data = $_command->query();

@@ -631,7 +631,7 @@ class BudgetItem extends CActiveRecord {
 
 		$_json .= '],';
 		$_json .= "\n";
-		$_json .= '   "data": { "entry_key_parent" : "'.$_entry_key_parent.'"},';
+		$_json .= '   "data": { "entry_key_parent" : "'.@$_entry_key_parent.'"},';
 		$_json .= "\n";
 		$_json .= '   "id": "root",';
 		$_json .= "\n";

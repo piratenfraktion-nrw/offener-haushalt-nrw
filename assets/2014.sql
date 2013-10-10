@@ -1,3 +1,24 @@
+DROP TABLE IF EXISTS `t_2014`;
+CREATE TABLE `t_2014` (
+  `Einzelplan` varchar(255) NOT NULL,
+  `Beschreibung` varchar(255) NOT NULL,
+  `Beschreibung1` varchar(255) NOT NULL,
+  `Wert1` double NOT NULL,
+  `Wert2` double NOT NULL,
+  `Typ` varchar(255) NOT NULL,
+  `Jahr` varchar(255) NOT NULL,
+  `Kapitel` varchar(255) NOT NULL,
+  `Kapitelname` varchar(255) NOT NULL,
+  `Kategorie` varchar(255) NOT NULL,
+  `Kategorie_ID` varchar(255) NOT NULL,
+  `Titel` varchar(255) NOT NULL,
+  PRIMARY KEY (`Einzelplan`,`Kapitel`,`Titel`),
+  KEY `Einzelplan` (`Einzelplan`),
+  KEY `Kapitel` (`Kapitel`),
+  KEY `Kategorie_ID` (`Kategorie_ID`),
+  KEY `Jahr` (`Jahr`),
+  KEY `Titel` (`Titel`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 INSERT INTO t_2014 (Einzelplan, Beschreibung, Beschreibung1, Wert1, Wert2, Typ, Jahr, Kapitel, Kapitelname, Kategorie, Kategorie_ID, Titel) VALUES ('1', 'Vermischte Einnahmen', '', 40000, 40000, 'Einnahmen', 2014, '01 010', 'Landtag', 'Verwaltungseinnahmen, Einnahmen aus Schuldendienst und dgl.', 2001, '119 01');
 INSERT INTO t_2014 (Einzelplan, Beschreibung, Beschreibung1, Wert1, Wert2, Typ, Jahr, Kapitel, Kapitelname, Kategorie, Kategorie_ID, Titel) VALUES ('1', 'Einnahmen aus Veröffentlichungen', '', 10000, 10000, 'Einnahmen', 2014, '01 010', 'Landtag', 'Verwaltungseinnahmen, Einnahmen aus Schuldendienst und dgl.', 2001, '119 02');
 INSERT INTO t_2014 (Einzelplan, Beschreibung, Beschreibung1, Wert1, Wert2, Typ, Jahr, Kapitel, Kapitelname, Kategorie, Kategorie_ID, Titel) VALUES ('1', 'Mieten und Pachten', '', 50000, 50000, 'Einnahmen', 2014, '01 010', 'Landtag', 'Verwaltungseinnahmen, Einnahmen aus Schuldendienst und dgl.', 2001, '124 01');

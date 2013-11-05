@@ -258,7 +258,7 @@ class BudgetItem extends CActiveRecord {
 	}
 
 	public function vgl_kat() {
-		$_kat = mysql_escape_string($this->category); // teilweise führen die Kategorienamen ''
+		$_kat = @mysql_escape_string($this->category); // teilweise führen die Kategorienamen ''
 		$_tit = $this->titel;
 
 		$_sql = "";
@@ -411,7 +411,7 @@ class BudgetItem extends CActiveRecord {
 		$_values = Yii::app()->params["jahre_val"];
 		$_sql = "";
 
-		$_kat = mysql_escape_string($this->category); // teilweise führen die Kategorienamen ''
+		$_kat = @mysql_escape_string($this->category); // teilweise führen die Kategorienamen ''
 		$_count_values = count($_values);
 		$_value_counter = 1;
 		foreach($_values as $_value) {
@@ -631,7 +631,7 @@ class BudgetItem extends CActiveRecord {
 
 		$_json .= '],';
 		$_json .= "\n";
-		$_json .= '   "data": { "entry_key_parent" : "'.$_entry_key_parent.'"},';
+		$_json .= '   "data": { "entry_key_parent" : "'.@$_entry_key_parent.'"},';
 		$_json .= "\n";
 		$_json .= '   "id": "root",';
 		$_json .= "\n";

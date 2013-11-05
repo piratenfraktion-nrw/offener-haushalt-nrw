@@ -63,13 +63,15 @@ function init_barchart(json_barchart){
         button = $jit.id('update'),
         orn = $jit.id('switch-orientation');
     //update json on click 'Update Data'
-    $jit.util.addEvent(button, 'click', function() {
-      var util = $jit.util;
-      if(util.hasClass(button, 'gray')) return;
-      util.removeClass(button, 'white');
-      util.addClass(button, 'gray');
-      barChart.updateJSON(json2);
-    });
+    if(button) {
+	    $jit.util.addEvent(button, 'click', function() {
+	      var util = $jit.util;
+	      if(util.hasClass(button, 'gray')) return;
+	      util.removeClass(button, 'white');
+	      util.addClass(button, 'gray');
+	      barChart.updateJSON(json2);
+	    });
+    }
     //dynamically add legend to list
     var legend = barChart.getLegend(),
         listItems = [];
@@ -77,5 +79,7 @@ function init_barchart(json_barchart){
       listItems.push('<div class=\'query-color\' style=\'background-color:'
           + legend[name] +'\'>&nbsp;</div>' + name);
     }
-    list.innerHTML = '<li>' + listItems.join('</li><li>') + '</li>';
+    if(list) {
+    	list.innerHTML = '<li>' + listItems.join('</li><li>') + '</li>';
+    }
 }

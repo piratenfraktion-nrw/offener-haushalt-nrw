@@ -272,12 +272,31 @@ $_params = array(
 		    "15" => "Ministerium für Gesundheit, Emanzipation, Pflege und Alter",
 		    "20" => "Allgemeine Finanzverwaltung"
 		),
+		"2014" => array(
+    		"1" => "Landtag",
+		    "2" => "Ministerpräsidentin",
+		    "3" => "Ministerium für Inneres und Kommunales",
+		    "4" => "Justizministerium",
+		    "5" => "Ministerium für Schule und Weiterbildung",
+		    "6" => "Ministerium für Innovation, Wissenschaft und Forschung",
+		    "7" => "Ministerium für Familie, Kinder, Jugend, Kultur und Sport",
+		    "8" => "",
+		    "9" => "Ministeriums für Bauen, Wohnen, Stadtentwicklung und Verkehr",
+		    "10" => "Ministerium für Klimaschutz, Umwelt, Landwirtschaft, Natur- und Verbraucherschutz",
+		    "11" => "Ministerium für Arbeit, Integration und Soziales",
+		    "12" => "Finanzministerium",
+		    "13" => "Landesrechnungshof",
+		    "14" => "Wirtschaft, Energie, Industrie, Mittelstand und Handwerk",
+		    "15" => "Ministerium für Gesundheit, Emanzipation, Pflege und Alter",
+		    "20" => "Allgemeine Finanzverwaltung"
+		),
 	),
 	"eoa_typen" => array(
 		"Einnahmen" => "Einnahmen",
 		"Ausgaben" => "Ausgaben",
 	),
 	"jahre" => array(
+		"2014" => "2014",
     	"2013" => "2013",
 	    "2012" => "2012",
 	    "2011" => "2011",
@@ -321,6 +340,7 @@ $_params = array(
 	    "2011",
 	    "2012",
 	    "2013",
+	    "2014"
     ),
 	"einzelplan_farben" => array(
         "1" => "#481b79",

@@ -42,10 +42,10 @@ class SiteController extends CController {
 			if(isset(Yii::app()->params["jahre"][$_GET["year"]]) === true) {
 				$this->params["year"] = $_GET["year"];
 			} else {
-				$this->params["year"] = "2014";
+				$this->params["year"] = "2015";
 			}
 		} else {
-			$this->params["year"] = "2014";
+			$this->params["year"] = "2015";
 		}
 
 		// entry - kombinierte ID des Titels 

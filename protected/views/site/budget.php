@@ -16,6 +16,38 @@ $this->widget('zii.widgets.grid.CGridView', array(
 ?>
 
 <br/>
+<?php
+$_c = Yii::app()->controller;
+if ($_c->params["entry_level"] >= 2) {
+    $_sql = "SELECT text FROM explanations WHERE year = '" . @mysql_escape_string($_c->params["year"]) . "' AND chapter = '" . @mysql_escape_string($_c->params["entry_point_part2"]) . "' ";
+    if ($_c->params["entry_level"] == 2) {
+        $_sql .= " AND category = '' AND title = ''";
+    } else if ($_c->params["entry_level"] == 3) {
+        $_sql .= " AND category = '" . @mysql_escape_string(substr($_c->params["entry_point_part3"], 3, 1)) . "'";
+    } else if ($_c->params["entry_level"] == 4) {
+        $_sql .= " AND title = '" . @mysql_escape_string($_c->params["entry_point_part4"]) . "'";
+    } else {
+        $_sql .= "AND 1=2";
+    }
+    $_connection = Yii::app()->db;
+    $_command = $_connection->createCommand($_sql);
+    $_data = $_command->query();
+    $text = "";
+    foreach ($_data as $_row) {
+        $text .= $_row['text'];
+    }
+
+    if ($text) {
+        ?>
+        <br/>
+        <h1>Erläuterungen</h1><br/>
+        <div class="explanations">
+            <?php echo $text ?>
+        </div>
+    <?php
+    }
+}
+?>
 <br/>
 <h1>Vorjahresvergleich<sup>&#42;</sup></h1>
 <div id="infovis2"></div>
@@ -135,7 +167,7 @@ if(isset($_GET["error"]) === true) {
                 </label>
                 <?php echo $form->textArea($model,'frage', array('rows'=>5, 'cols'=>15)); ?>
                 <?php echo $form->error($model,'frage'); ?>
-                <?php echo '<input type="hidden" name="hidden_year" value="'.Yii::app()->controller->params["year"].'"'; ?> 
+                <?php echo '<input type="hidden" name="hidden_year" value="' . Yii::app()->controller->params["year"] . '"'; ?>
             </div>
         </li>
         <li>
